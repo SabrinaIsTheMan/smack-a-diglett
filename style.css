@@ -1,7 +1,8 @@
 html {
   box-sizing: border-box;
-  font-size: 10px;
-  background: #ffc600;
+  font-size: 125%;
+  background: #93C572;
+  font-family: 'Exo 2', sans-serif;
 }
 
 *, *:before, *:after {
@@ -11,29 +12,61 @@ html {
 body {
   padding: 0;
   margin: 0;
-  font-family: 'Amatic SC', cursive;
+}
+
+.wrapper {
+  width: 90%;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+a{
+  color: white;
+}
+
+nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* height: 30vh; */
+  width: 100%;
 }
 
 h1 {
-  text-align: center;
-  font-size: 10rem;
+  font-size: 2rem;
   line-height: 1;
   margin-bottom: 0;
+  font-family: 'Press Start 2P', cursive;
+}
+
+button {
+  margin-bottom: 0;
+}
+
+button p {
+  padding: 0 10px;
+  font-size: 1rem;
+  font-style: uppercase;
+  border: none;
+  line-height: 1rem;
+  font-family: 'Exo 2', sans-serif;
 }
 
 .score {
   background: white;
-  padding: 0 3rem;
+  padding: 0.5rem;
   line-height: 1;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
 }
 
-.game {
-  width: 600px;
-  height: 400px;
+.game{
+  width: 60vw;
+  height: 70vh;
   display: flex;
   flex-wrap: wrap;
   margin: 0 auto;
+  padding-bottom: 20px;
 }
 
 .hole {
@@ -44,39 +77,55 @@ h1 {
 
 .hole:after {
   display: block;
-  background: url(dirt.svg) bottom center no-repeat;
+  background: url(./assets/diglettDirt.svg) bottom center no-repeat;
   background-size: contain;
   content: '';
   width: 100%;
-  height:70px;
+  height: 40vh;
   position: absolute;
   z-index: 2;
-  bottom: -30px;
+  bottom: -90px;
 }
 
 .mole {
-  background: url('mole.svg') bottom center no-repeat;
-  background-size: 60%;
+  background: url('./assets/diglettNaked.svg') bottom center no-repeat;
+  background-size: 90%;
   position: absolute;
   top: 100%;
   width: 100%;
   height: 100%;
-  transition:all 0.4s;
+  transition:all 0.5s;
+  cursor: pointer;
 }
 
 .hole.up .mole {
   top: 0;
+  cursor: pointer;
 }
 
-nav {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+footer{
+  text-align: center;
+  width: 100%;
+  height: 5vh;
+  background-color: black;
+  color: white;
 }
 
-button {
-  padding: 20px 50px;
-  margin-top: 50px;
-  font-size: 3rem;
+.warning {
+  text-align: center;
+  height: 85vh;
+  display: none;
+}
+
+/* if screen isn't big enough, can't play game */
+@media (max-width: 1080px) {
+  .warning {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .game, button, .score {
+    display: none;
+  }
 }
