@@ -1,66 +1,65 @@
-const app = {};
+const game = {};
 
-app.randomTime = (min, max) => {
+game.randomTime = (min, max) => {
     return Math.round(Math.random() * (max - min) + min);
 }
 
-app.randomHole = (holes) => {
-    const index = Math.floor(Math.random() * app.holes.length);
-    const hole = app.holes[index];
+game.randomHole = (holes) => {
+    const index = Math.floor(Math.random() * game.holesArray.length);
+    const hole = game.holesArray[index];
     
-    if(hole === app.lastHole) {
-        return app.randomHole(holes);
-    }
+    if (hole === game.lastHole) {
+        return game.randomHole(hole);
+    } //prevents repeating holes
     
-    app.lastHole = hole;
+    game.lastHole = hole;
     return hole;
 }
 
-app.peep = () => {
-    const time = app.randomTime(500, 1000);
-    const hole = app.randomHole(app.holes);
+game.peep = () => {
+    const time = game.randomTime(500, 1000);
+    const hole = game.randomHole(game.holesArray);
     hole.classList.add('up');
 
     setTimeout(() => {
         hole.classList.remove('up');
-        if(!app.timeUp) app.peep();
+        if (!game.timeUp) game.peep();
         }, time);
     }
 
-app.startGame = () => {
-    app.score.textContent = 0;
-    app.timeUp = false; // for restarts
-    app.counter = 0; // for restarts
-    app.peep();
+game.startGame = () => {
+    game.score.textContent = 0; // for restarts
+    game.timeUp = false; // for restarts
+    game.counter = 0; // for restarts
+    game.peep();
 
-    setTimeout(() => app.timeUp = true, 10000);
+    setTimeout(() => game.timeUp = true, 10000);
 }
 
-app.bonk = (e) => {
-    if(!e.isTrusted){
-        return; // cheater!
-    } else {
-        app.counter++;
-        this.parentNode.classList.remove('up');
-        app.score.textContent = app.counter;
-    }
-}
-
-app.init = () => {
-    app.holes = document.querySelectorAll('.hole');
-    app.moles = document.querySelectorAll('.mole');
-    app.score = document.querySelector('.score');
-    app.button = document.querySelector('.button');
-
-    app.lastHole;
-    app.timeUp = false;
-    app.counter = 0;
+game.clickHandler = (event) => {
     
-    app.moles.forEach = (mole) => {
-        mole.addEventListener('click', app.bonk);
+    if(event.isTrusted === false){
+        return; // cheating cheaters
+    } else {
+        game.counter++;
+        event.currentTarget.classList.remove('up'); // .up is removed from .hole
+        game.score.textContent = game.counter;
     }
-
-    app.button.addEventListener('click', app.startGame);
 }
 
-app.init();
+game.init = () => {
+    game.holesArray = Array.from(document.querySelectorAll('.hole'));
+    game.digArray = Array.from(document.querySelectorAll('.dig'));
+    game.score = document.querySelector('.score');
+    game.button = document.querySelector('.button');
+
+    game.lastHole;
+    game.timeUp = false;
+    game.counter = 0;
+
+    game.button.addEventListener('click', game.startGame);
+
+    game.digArray.forEach(dig => dig.addEventListener('click', game.clickHandler));
+}
+
+game.init();

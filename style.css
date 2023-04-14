@@ -29,8 +29,8 @@ nav {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* height: 30vh; */
   width: 100%;
+  height: 25vh;
 }
 
 h1 {
@@ -40,16 +40,16 @@ h1 {
   font-family: 'Press Start 2P', cursive;
 }
 
-button {
+.button {
   margin-bottom: 0;
 }
 
-button p {
-  padding: 0 10px;
+.button p {
+  padding: 0 5px;
   font-size: 1rem;
   font-style: uppercase;
   border: none;
-  line-height: 1rem;
+  line-height: 0.8rem;
   font-family: 'Exo 2', sans-serif;
 }
 
@@ -66,41 +66,41 @@ button p {
   display: flex;
   flex-wrap: wrap;
   margin: 0 auto;
-  padding-bottom: 20px;
 }
 
 .hole {
   flex: 1 0 33.33%;
   overflow: hidden;
   position: relative;
+  pointer-events: none;
 }
 
 .hole:after {
   display: block;
-  background: url(./assets/diglettDirt.svg) bottom center no-repeat;
+  background: url('./assets/diglettDirt.png') bottom center no-repeat;
   background-size: contain;
   content: '';
   width: 100%;
   height: 40vh;
   position: absolute;
   z-index: 2;
-  bottom: -90px;
+  bottom: -95px;
 }
 
-.mole {
-  background: url('./assets/diglettNaked.svg') bottom center no-repeat;
+.dig {
+  background: url('./assets/diglettNaked.png') bottom center no-repeat;
   background-size: 90%;
   position: absolute;
   top: 100%;
   width: 100%;
   height: 100%;
   transition:all 0.5s;
-  cursor: pointer;
+  border: none;
+  pointer-events: auto;
 }
 
-.hole.up .mole {
+.hole.up .dig {
   top: 0;
-  cursor: pointer;
 }
 
 footer{
@@ -109,6 +109,8 @@ footer{
   height: 5vh;
   background-color: black;
   color: white;
+  position: absolute;
+  bottom: 0;
 }
 
 .warning {
@@ -125,7 +127,7 @@ footer{
     align-items: center;
   }
 
-  .game, button, .score {
+  .game, .button, .score {
     display: none;
   }
 }
