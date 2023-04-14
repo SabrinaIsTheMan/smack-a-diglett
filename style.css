@@ -72,6 +72,7 @@ h1 {
   flex: 1 0 33.33%;
   overflow: hidden;
   position: relative;
+  pointer-events: none;
 }
 
 .hole:after {
@@ -95,6 +96,7 @@ h1 {
   height: 100%;
   transition:all 0.5s;
   border: none;
+  pointer-events: auto;
 }
 
 .hole.up .dig {

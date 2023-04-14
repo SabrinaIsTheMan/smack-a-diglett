@@ -42,7 +42,7 @@ game.clickHandler = (event) => {
         return; // cheating cheaters
     } else {
         game.counter++;
-        this.parentElement.classList.remove('up'); // .up is removed from .hole
+        event.currentTarget.classList.remove('up'); // .up is removed from .hole
         game.score.textContent = game.counter;
     }
 }
